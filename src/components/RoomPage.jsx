@@ -4,16 +4,16 @@ import axios from "axios";
 import RoomNavbar from "./MyRoom/RoomNavbar";
 import LoginPage from "./LoginPage";
 import Albums from "./MyRoom/Albums";
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 export default function RoomPage() {
   const { roomId } = useParams();
   const [room, setRoom] = useState(null);
   const token = localStorage.getItem("token");
 
-
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/rooms/${roomId}`, {
+      .get(`${backendURL}/api/rooms/${roomId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setRoom(res.data))

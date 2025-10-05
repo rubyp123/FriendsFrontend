@@ -10,10 +10,11 @@ const SignUpPage = () =>{
     const [name, setName] = useState()
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
+    const backendURL = import.meta.env.VITE_BACKEND_URL;
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        axios.post("http://localhost:5000/api/auth/register", { name, email, password })
+        axios.post(`${backendURL}/api/auth/register`, { name, email, password })
         .then((res) => {
             toast.success(res.data.message);
             console.log(res);

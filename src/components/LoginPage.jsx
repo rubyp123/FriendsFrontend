@@ -3,7 +3,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import img1 from "../assets/HomePageImg.webp";
-
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
+  
 const LoginPage =({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,7 +13,7 @@ const LoginPage =({ setToken }) => {
   const handleLogin =(e) => {
     e.preventDefault();
 
-    axios.post("http://localhost:5000/api/auth/login", { email, password })
+    axios.post(`${backendURL}/api/auth/login`, { email, password })
     .then((res) => {
         toast.success(res.data.message);
         const { token ,user } = res.data;

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const token = localStorage.getItem("token");
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const Albums = ({ room }) => {
   const [text, setText] = useState("");
@@ -14,18 +15,23 @@ const Albums = ({ room }) => {
   const fetchAlbums = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/albums/${room.roomId}`,
+        `${backendURL}/api/albums/${room.roomId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
+      console.log(res.data.albums)
       setAlbums(res.data.albums);
     } catch (err) {
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    console.log("Albums updated:", albums);
+  }, [albums]);
 
   useEffect(() => {
     fetchAlbums();
@@ -41,7 +47,7 @@ const Albums = ({ room }) => {
       formData.append("text", text);
 
       const res = await axios.post(
-        "http://localhost:5000/api/albums/upload",
+        `${backendURL}/api/albums/upload`,
         formData,
         {
           headers: {
@@ -63,7 +69,7 @@ const Albums = ({ room }) => {
   const handleDeleteUpload = async (id, userEmail) => {
     try {
       const res = await axios.delete(
-        `http://localhost:5000/api/albums/${id}`,
+        `${backendURL}/api/albums/${id}`,
         {
           data: { userEmail },
           headers: { Authorization: `Bearer ${token}` },
@@ -86,7 +92,7 @@ const Albums = ({ room }) => {
     <>
       {/* Cards */}
      {
-      albums ? 
+      albums.length==0 ? 
       <>
       <div> Upload Photos and save you memories.. </div>
       </> : 

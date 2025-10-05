@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 export default function MyRooms({reload}) {
   const [rooms, setRooms] = useState([]);
@@ -8,7 +9,7 @@ export default function MyRooms({reload}) {
   useEffect(() => {
     if (token) {
       axios
-        .get("http://localhost:5000/api/rooms/my-rooms", {
+        .get(`${backendURL}/api/rooms/my-rooms`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => setRooms(res.data.rooms))
@@ -23,7 +24,7 @@ export default function MyRooms({reload}) {
 
   const handleDeleteRoom = (roomId) => {
     if(window.confirm("Are you sure want to delete this room ?")){
-        axios.delete(`http://localhost:5000/api/rooms/delete/${roomId}`, {
+        axios.delete(`${backendURL}/api/rooms/delete/${roomId}`, {
             headers : {Authorization : `Bearer ${localStorage.getItem("token")}`}
         })
         .then((res) => {

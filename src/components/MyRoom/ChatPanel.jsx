@@ -2,14 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { getSocket } from "../../socket";
 import { format, parseISO } from "date-fns";
 
-const API_BASE = "http://localhost:5000";
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 async function fetchRoomMessages(roomId, { limit = 30, cursor } = {}) {
   const token = localStorage.getItem("token");
   const qs = new URLSearchParams({ roomId, limit: String(limit) });
   if (cursor) qs.set("cursor", cursor);
 
-  const res = await fetch(`${API_BASE}/api/messages?${qs.toString()}`, {
+  const res = await fetch(`${backendURL}/api/messages?${qs.toString()}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   if (!res.ok) throw new Error(await res.text());

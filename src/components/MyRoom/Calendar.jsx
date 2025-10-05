@@ -5,8 +5,7 @@ import { addMonths, eachDayOfInterval, endOfMonth, endOfWeek, format, isSameMont
 import { getSocket } from "../../socket";
 import axios from "axios";
 
-
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000";
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 function ymd(d) {
   return format(d, "yyyy-MM-dd");
@@ -39,7 +38,7 @@ export default function Calendar({ roomId, open, onClose }) {
     try {
       const token = localStorage.getItem("token");
       const yyyymm = monthDate instanceof Date ? formatMonth(monthDate) : monthDate;
-      const res = await fetch(`${API_BASE}/api/calendar/${roomId}/${yyyymm}`,
+      const res = await fetch(`${backendURL}/api/calendar/${roomId}/${yyyymm}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -107,7 +106,7 @@ export default function Calendar({ roomId, open, onClose }) {
       time: timeRef.current.value,
       color: colorRef.current.value || "#22c55e",
     };
-    const res = await fetch(`${API_BASE}/api/calendar/save`, {
+    const res = await fetch(`${backendURL}/api/calendar/save`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       body: JSON.stringify(payload),
@@ -127,7 +126,7 @@ export default function Calendar({ roomId, open, onClose }) {
     console.log("Deleting date:", dateStr);
 
     try {
-      const res = await axios.delete(`${API_BASE}/api/calendar/delete`, {
+      const res = await axios.delete(`${backendURL}/api/calendar/delete`, {
         headers: { Authorization: `Bearer ${token}` },
         data: { roomId, date: dateStr }, // axios lets us send body with DELETE
       });

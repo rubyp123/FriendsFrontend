@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import JoinRoom from "./JoinRoom";
 import MyRooms from "./MyRooms";
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 const CreateAndJoinRooms = ({ showModal, setShowModal }) => {
   const token = localStorage.getItem("token");
@@ -15,7 +16,7 @@ const CreateAndJoinRooms = ({ showModal, setShowModal }) => {
     }
     axios
       .post(
-        "http://localhost:5000/api/rooms/create",
+        `${backendURL}/api/rooms/create`,
         { name: roomName },
         { headers: { Authorization: `Bearer ${token}` } }
       )

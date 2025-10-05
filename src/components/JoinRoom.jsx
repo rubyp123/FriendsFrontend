@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+
 
 export default function JoinRoom() {
   const [roomId, setRoomId] = useState("");  //  user enters Room ID
@@ -15,7 +17,7 @@ export default function JoinRoom() {
     }
 
     axios.post(
-      `http://localhost:5000/api/rooms/join/${roomId}`,
+      `${backendURL}/api/rooms/join/${roomId}`,
       {},
       { headers: { Authorization: `Bearer ${token}` } }
     )

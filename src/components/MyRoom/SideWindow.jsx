@@ -43,12 +43,13 @@ const SidedWindow = ({
   return (
     <aside
       className={`hidden md:flex fixed top-0 right-0 bottom-0 z-40
-  bg-gradient-to-b from-[#deb3bb] via-[#c08872] via-[#9a5b4a] via-[#39666d]
-  via-[#fbe7d6] via-[#e0944a] via-[#84846a] via-[#4e9193]
-  via-[#5f3439] via-[#c76832] via-[#e8b794] via-[#c65358]
-  via-[#774846] via-[#fcf6e8] via-[#99b3b1] via-[#b0735f]
-  via-[#f8dac8] via-[#f0b663] via-[#d79986] to-[#252935]
-  backdrop-blur border-l border-gray-200 shadow-inner`}
+                  bg-gradient-to-b from-[#deb3bb] via-[#c08872] via-[#9a5b4a] via-[#39666d]
+                  via-[#fbe7d6] via-[#e0944a] via-[#84846a] via-[#4e9193]
+                  via-[#5f3439] via-[#c76832] via-[#e8b794] via-[#c65358]
+                  via-[#774846] via-[#fcf6e8] via-[#99b3b1] via-[#b0735f]
+                  via-[#f8dac8] via-[#f0b663] via-[#d79986] to-[#252935]
+                  backdrop-blur border-l border-gray-200 shadow-inner`
+                }
       style={{ width: `${width}px` }}
     >
       {/* Resizer bar on the left edge */}
